@@ -8,8 +8,7 @@ ENV FC_LANG en-US
 ENV LC_CTYPE en_US.UTF-8
 
 # install tools
-RUN apk add --update nodejs wget bash python java-cacerts \
-  ; npm install -g pm2 \
+RUN apk add --update wget bash java-cacerts \
   ; ln -sf "${JAVA_HOME}/bin/"* "/usr/bin/"
 
 # fix broken cacerts
@@ -34,6 +33,7 @@ RUN unzip ProfitTrailer.zip \
 
 # add the application source to the image
 COPY start /var/opt/pt
+RUN chmod +x /var/opt/pt/start
 
 # tidy up
 RUN rm -rf /tmp/* /var/cache/apk/*
@@ -42,4 +42,4 @@ RUN rm -rf /tmp/* /var/cache/apk/*
 EXPOSE 8081
 
 # run it
-ENTRYPOINT ["./start"]
+ENTRYPOINT ["/var/opt/pt/start"]

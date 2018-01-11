@@ -1,5 +1,4 @@
 version: '2'
-
 services:
   profit-trailer:
     build:
@@ -12,7 +11,7 @@ services:
     network_mode: "host"
     restart: always
     volumes:
-      - ./config:/var/opt/pt/config
+      - ./profit-trailer/config:/var/opt/pt/config
   pt-feeder:
     build:
       context: ./pt-feeder/
