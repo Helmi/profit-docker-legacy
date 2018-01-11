@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  profit-trailer:
+    build:
+      context: ./profit-trailer
+      dockerfile: Dockerfile
+    environment:
+      PT_VERSION: 1.2.6.9
+    ports:
+      - '8081:8081'
+    network_mode: "host"
+    restart: always
+    volumes:
+      - ./config:/var/opt/pt/config
+  pt-feeder:
+    build:
+      context: ./pt-feeder/
+      dockerfile: Dockerfile
+    depends_on:
+      - profit-trailer
+    environment:
+      PTF_VERSION: 1.3.3.208
+    ports:
+      - '7071:7071'
+    network_mode: "host"
+    restart: always
+    volumes_from:
+      - profit-trailer
+    volumes:
+      - ./pt-feeder/config:/var/opt/pt-feeder/config
+      - ./pt-feeder/database:/var/opt/pt-feeder/database
