@@ -1,22 +1,23 @@
 FROM microsoft/dotnet
 
-ENV PTF_VERSION=1.3.3.208
+ARG PTF_VERSION
 
 # download package
 RUN apt-get update \
   ; apt-get install -y unzip \
   ; apt-get clean \
-  ; mkdir -p /var/opt/pt-feeder \
-  ; wget https://github.com/mehtadone/PTFeeder/releases/download/pt-feeder-v$PTF_VERSION/pt-feeder-v$PTF_VERSION.zip -P /var/opt/pt-feeder
+  ; mkdir -p /var/opt \
+  ; wget https://github.com/mehtadone/ptfeeder-beta/releases/download/pt-feeder-beta-v${PTF_VERSION}/pt-feeder-v${PTF_VERSION}.zip -P /var/opt
 
 # unzip the app
-WORKDIR /var/opt/pt-feeder
-RUN unzip pt-feeder-v$PTF_VERSION.zip \
-  ; rm pt-feeder-v$PTF_VERSION.zip \
+WORKDIR /var/opt
+RUN unzip pt-feeder-v${PTF_VERSION}.zip \
+  ; rm pt-feeder-v${PTF_VERSION}.zip \
+  ; mv pt-feeder ptf; cd ptf \
+  ; rm -rf config database \
   ; chmod +x pt-feeder.dll
 
-# expose our default runtime port
-EXPOSE 7071
+WORKDIR /var/opt/ptf
 
 # run it
 ENTRYPOINT ["dotnet", "pt-feeder.dll"]
