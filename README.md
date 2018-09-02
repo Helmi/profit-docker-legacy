@@ -1,6 +1,6 @@
 #### profit-docker
 
-#Docker Setup for Profit Trailer and PT-Feeder
+# Docker Setup for Profit Trailer and PT-Feeder
 
 This is a combined setup for the Crypto currency bot Profit-Trailer and its Addon PT-Feeder.
 
