@@ -1,6 +1,10 @@
+# OUTDATED
+
+This project is outdated. Head to https://github.com/Helmi/profit-docker for a more up-to-date solution.
+
 #### profit-docker
 
-# Docker Setup for Profit Trailer and PT-Feeder
+## Docker Setup for Profit Trailer and PT-Feeder
 
 This is a combined setup for the Crypto currency bot Profit-Trailer and its Addon PT-Feeder.
 
